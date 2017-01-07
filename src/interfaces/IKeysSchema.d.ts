@@ -1,0 +1,3 @@
+interface IKeysSchema {
+	presharedKey: string
+}

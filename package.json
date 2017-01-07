@@ -1,0 +1,31 @@
+{
+	"name": "authenticator",
+	"version": "1.0.0",
+	"description": "An HTTP microservice for authentication",
+	"main": "build/server.js",
+	"scripts": {
+		"start": "node build/server",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Luzian Zagadinow",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/bcrypt-nodejs": "0.0.30",
+		"@types/jsonwebtoken": "^7.1.33",
+		"@types/randomstring": "^1.1.5",
+		"@types/restify": "^2.0.35",
+		"@types/sqlite3": "^2.2.31",
+		"typescript": "2.1.4",
+		"grunt": "1.0.1",
+		"grunt-ts": "6.0.0-beta.3",
+		"randomstring": "1.1.5"
+	},
+	"dependencies": {
+		"bcrypt-nodejs": "0.0.3",
+		"jsonwebtoken": "7.2.1",
+		"restify": "4.3.0",
+		"sqlite3": "3.1.8",
+		"sqlite-promised": "1.0.7"
+	}
+}

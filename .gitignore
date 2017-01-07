@@ -1,0 +1,9 @@
+*
+!/.vscode/
+!/src/
+!/src/*
+
+!/package.json
+!/gruntfile.js
+!/app-settings.json
+!/.gitignore
