@@ -1,3 +1,3 @@
 interface IKeysSchema {
-	presharedKey: string
+	JwtPresharedKey: string
 }
