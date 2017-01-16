@@ -1,4 +1,5 @@
 {
+	"userSecretsId": "BlogApi-a1c1eb3a-9550-4e07-a3e5-0e03186b3acd",
 	"name": "authenticator",
 	"version": "1.0.0",
 	"description": "An HTTP microservice for authentication",
@@ -18,14 +19,14 @@
 		"@types/sqlite3": "^2.2.31",
 		"typescript": "2.1.4",
 		"grunt": "1.0.1",
-		"grunt-ts": "6.0.0-beta.3",
-		"randomstring": "1.1.5"
+		"grunt-ts": "6.0.0-beta.3"
 	},
 	"dependencies": {
 		"bcrypt-nodejs": "0.0.3",
 		"jsonwebtoken": "7.2.1",
 		"restify": "4.3.0",
 		"sqlite3": "3.1.8",
-		"sqlite-promised": "1.0.7"
+		"sqlite-promised": "1.0.7",
+		"randomstring": "1.1.5"
 	}
 }
