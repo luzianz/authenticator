@@ -16,7 +16,7 @@ module.exports = function (grunt) {
 				comments: false,
 				target: "es6",
 				declaration: false,
-				sourceMap: false
+				sourceMap: true
 			}
 		}
 	});
