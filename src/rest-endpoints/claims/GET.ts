@@ -2,16 +2,23 @@
 /// <reference path="../../interfaces/IClaims.d.ts" />
 /// <reference path="../../interfaces/ITokenResponse.d.ts" />
 
-// POST /api/sessions
-
 import * as restify from 'restify';
 
 import { signAsync } from '../../lib/jwt-async';
 import { getUserByEmailAsync } from '../../data-access';
 import { compareAsync } from '../../lib/bcrypt-async';
-import { dateAdd } from '../../lib/datetime';
+import { getSecrets } from '../../lib/secrets';
+import Lazy from '../../lib/Lazy';
 
-const keys: IKeysSchema = require('../../../secrets/keys.json');
+const jwtPresharedKey = new Lazy(() => {
+	if (process.env.NODE_ENV == 'development') {
+		return getSecrets().JwtPresharedKey;
+	} else if (process.env.NODE_ENV == 'production') {
+		return process.env.JWTPRESHAREDKEY;
+	} else {
+		return undefined;
+	}
+});
 
 function isAuthHeaderValid(req: restify.Request): boolean {
 	if (!req.authorization) return false;
@@ -43,13 +50,18 @@ async function handleHttpRequestAsync(req: restify.Request, res: restify.Respons
 	if (isAuthHeaderValid(req)) {
 		const user = await authenticateAsync(req.authorization.basic.username, req.authorization.basic.password);
 		const claims: IClaims = {
-			authenticationIssuer: req.url,
-			email: user.email,
-			expiration: dateAdd(new Date(), 'day', 1)
+			email: user.email
 		};
-		const response: ITokenResponse = {
-			token: await signAsync(claims, keys.presharedKey, { algorithm: 'HS256' })
-		};
+		const minute = 60;
+		const hour = minute * 60;
+		const day = hour * 24;
+		const response = await signAsync(claims, jwtPresharedKey.value, {
+			algorithm: 'HS256', 
+			issuer: req.absoluteUri('/'),
+			audience: req.absoluteUri('/'),
+			expiresIn: day
+		});
+
 		res.send(200, response);
 	} else {
 		throw new restify.NotAuthorizedError('invalid authorization header');
