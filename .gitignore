@@ -5,5 +5,7 @@
 
 !/package.json
 !/gruntfile.js
-!/app-settings.json
+!/docker-run.sh
+!/Dockerfile
+!/.dockerignore
 !/.gitignore
