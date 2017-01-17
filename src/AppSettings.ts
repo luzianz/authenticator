@@ -13,7 +13,7 @@ export default class AppSettings implements ISettingsSchema
 	}
 
 	public get host() {
-		return this.getValue('HOST', 'localhost');
+		return this.getValue('HOST');
 	}
 
 	private getValue<P extends keyof ISettingsSchema, T>(environmentVariableName: EnvNames, defaultValue?: T) {
