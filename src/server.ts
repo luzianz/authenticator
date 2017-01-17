@@ -8,6 +8,11 @@ import { configureEndpoints } from './rest-endpoints';
 import AppSettings from './AppSettings';
 
 async function main() {
+	if (process.env.NODE_ENV == 'production' && typeof process.env.JWTPRESHAREDKEY == 'undefined') {
+		const msg = 'environment variable JWTPRESHAREDKEY is missing while running in production';
+		throw new Error(msg);
+	}
+
 	const appSettings = new AppSettings();
 
 	const server = restify.createServer({ name: appSettings.serviceName });
